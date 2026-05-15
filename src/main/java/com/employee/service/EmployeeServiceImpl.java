@@ -55,4 +55,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not found with this id::"+id));
 		employeeRepository.delete(employee);
 	}
+
+	@Override
+	public EmployeeDto findByFirstName(String firstName) {
+		Employee e = employeeRepository.findByFirstName(firstName);
+		return EmployeeMapper.mapToDto(e);
+	}
 }
