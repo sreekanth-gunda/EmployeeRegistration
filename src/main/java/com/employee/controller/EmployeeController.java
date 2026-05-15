@@ -2,6 +2,7 @@ package com.employee.controller;
 
 import java.util.List;
 
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -53,5 +54,11 @@ public class EmployeeController {
 	public String deleteEmployee(@PathVariable Long id) {
 		employeeService.deleteEmployee(id);
 		return "Employee deleted successfully";
+	}
+
+	@GetMapping("/byName/{firstName}")
+	public ResponseEntity<EmployeeDto> findByFirstName(@PathVariable String firstName){
+		EmployeeDto e = employeeService.findByFirstName(firstName);
+		return new ResponseEntity<>(e,HttpStatus.OK);
 	}
 }
